@@ -1,0 +1,1 @@
+If you want to use the demo app you need to extract the file from the zip in this rep. Additionally, you need to install all the requirements or work on anaconda.
