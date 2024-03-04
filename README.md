@@ -6,10 +6,7 @@
 In a world dominated by the internet, the rise of malicious URLs poses a constant threat to cybersecurity. Traditional blacklists struggle to keep up with the evolving landscape of cyber threats. This README introduces an advanced machine learning approach for the detection of phishing, malware, and spam URLs. We've crafted a sophisticated model that combines adversarial training, refined feature engineering, and a powerful ensemble of classifiers. 
 
 
-<video width="700" height="400" controls>
-  <source src="media/demo.webm" type="video/webm">
-  Your browser does not support the video tag.
-</video>
+[demo.webm](https://github.com/orelz890/URL_Multiclass_Classification/assets/93476230/73a3165c-a281-4e15-ae6b-c3f8cf5574c1)
 
 
 ## Key Features:
