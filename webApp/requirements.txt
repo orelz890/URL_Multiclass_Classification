@@ -1,0 +1,13 @@
+flask
+gunicorn
+gevent
+scikit-learn
+fuzzywuzzy
+python-Levenshtein
+tldextract
+spacy
+seaborn
+pandas
+numpy
+scipy
+joblib
