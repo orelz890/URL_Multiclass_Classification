@@ -1,0 +1,139 @@
+<!-- FILEPATH: /c:/Users/אנהפינצוק/flask-docker-example/templates/virus_total.html -->
+<html>
+<head>
+    <style>
+        body {
+            background-color: #f0f5fc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        h1 {
+            color: #000;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .input-box {
+            width: 300px;
+            height: 30px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 300px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        #popupClose {
+            cursor: pointer;
+            float: right;
+            font-size: 20px;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Best URL Classifier Page!<br>(After VirusTotal &#128526;)</h1>
+        <input type="text" id="urlInput" class="input-box" placeholder="Enter URL path">
+        <button id="scanButton" class="button">Scan URL</button>
+    </div>
+
+    <div id="popup" class="popup">
+        <span id="popupClose">&times;</span>
+        <p id="popupContent"></p>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+    document.getElementById('scanButton').addEventListener('click', function() {
+        var url = document.getElementById('urlInput').value;
+
+        fetch('/scan-url', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: url }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if(data.error) {
+                showPopup(`Error: ${data.error}`);
+            } else {
+                // Adjusted to handle different classifications
+                showPopup(`URL: ${data.url}<br>Classification: ${data.result}`);
+            }
+        })
+        .catch(error => {
+            showPopup(`Error: ${error.message}`);
+            console.error('Error:', error);
+        });
+    });
+
+    function showPopup(content) {
+        document.getElementById('overlay').style.display = 'block';
+        var popup = document.getElementById('popup');
+        popup.style.display = 'block';
+        document.getElementById('popupContent').innerHTML = content;
+        document.getElementById('popupClose').addEventListener('click', closePopup);
+        document.getElementById('overlay').addEventListener('click', closePopup);
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
