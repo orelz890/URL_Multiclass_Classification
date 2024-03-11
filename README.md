@@ -35,10 +35,12 @@ Traditional blacklists often lag behind, allowing over 90% of malicious URL clic
    ```
 
 2. **Run the Flask App:**
+
    ```
    python app.py
    ```
-   Access the application at `http://localhost:5000` in your web browser.
+  * Dont forget to unzip url_model.zip in the webApp folder first.
+  * Access the application at `http://localhost:5000` in your web browser.
 
 3. **Test with Your URLs:**
    - Navigate to the application and input URLs for real-time detection.
